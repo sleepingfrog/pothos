@@ -1,1 +1,1 @@
-Marginalia::Comment.components = [:application, :controller, :action, :job, :pid, :request_id]
+Marginalia::Comment.components = [:application, :controller_with_namespace, :action, :job, :pid, :request_id]
