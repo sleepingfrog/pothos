@@ -4,3 +4,7 @@
 require_relative 'config/application'
 
 Rails.application.load_tasks
+
+unless Rails.env.development?
+  Rake.application.instance_variable_get("@tasks").delete("db:rollback")
+end
