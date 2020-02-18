@@ -26,7 +26,9 @@ class AuthorsController < ApplicationController
   def update
     @author = Author::Contract::Edit.new(Author.find(params[:id]))
     if @author.validate(params[:author])
-      @author.save
+      Author.transaction do
+        @author.save
+      end
       redirect_to :authors
     else
       render :edit
