@@ -6,6 +6,9 @@
   <%= form.text_field :name %>
   <%= form.label :age %>
   <%= form.number_field :age %>
-
+  <%= form.fields_for :books do |book_form| %>
+    <%= book_form.label :name %>
+    <%= book_form.text_field :name %>
+  <% end %>
   <%= form.submit %>
 <% end %>

@@ -5,6 +5,7 @@ class AuthorsController < ApplicationController
 
   def new
     @author = Author::Contract::Create.new(Author.new)
+    @author.prepopulate!
   end
 
   def create
