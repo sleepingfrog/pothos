@@ -9,6 +9,10 @@
   <%= form.fields_for :books do |book_form| %>
     <%= book_form.label :name %>
     <%= book_form.text_field :name %>
+    <%= book_form.label :_delete do |l| %>
+      <%= book_form.check_box :_delete %>
+      <%= l.translation %>
+    <% end %>
   <% end %>
   <%= form.submit %>
 <% end %>

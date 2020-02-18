@@ -16,7 +16,7 @@ module Author::Contract
                nil
              end
 
-      if options[:fragment].except(:id).values.all?(&:blank?)
+      if options.dig(:fragment, :_delete).to_s == "1"
         if item
           item.model.mark_for_destruction
         end
@@ -31,6 +31,8 @@ module Author::Contract
     }
     collection :books, prepopulator: books_prepopulator, populator: books_populator do
       property :name
+
+      property :_delete, virtual: true
     end
   end
 end
