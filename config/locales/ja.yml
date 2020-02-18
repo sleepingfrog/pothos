@@ -1,0 +1,10 @@
+---
+ja:
+  activemodel:
+    attributes:
+      author:
+        name: 作者名
+        age: 年齢
+      book:
+        name: 書籍名
+        _delete: 削除
