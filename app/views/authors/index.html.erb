@@ -4,8 +4,8 @@
 <% @authors.each do |author| %>
   <%= tag.ul do %>
     <%= tag.li do %>
-        <%= author.id %>
-        <%= author.name %>
+      <%= link_to author.id, edit_author_path(author) %>
+      <%= author.name %>
     <% end %>
   <% end %>
 <% end %>

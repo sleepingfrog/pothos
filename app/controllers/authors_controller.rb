@@ -19,8 +19,17 @@ class AuthorsController < ApplicationController
   end
 
   def edit
+    @author = Author::Contract::Edit.new(Author.find(params[:id]))
+    @author.prepopulate!
   end
 
   def update
+    @author = Author::Contract::Edit.new(Author.find(params[:id]))
+    if @author.validate(params[:author])
+      @author.save
+      redirect_to :authors
+    else
+      render :edit
+    end
   end
 end
