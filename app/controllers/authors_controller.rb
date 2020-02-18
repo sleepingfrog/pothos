@@ -28,6 +28,7 @@ class AuthorsController < ApplicationController
     if @author.validate(params[:author])
       Author.transaction do
         @author.save
+        @author.books.select{|book| book.model.marked_for_destruction? }.each{|book| book.model.destroy}
       end
       redirect_to :authors
     else

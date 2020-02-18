@@ -10,9 +10,16 @@ module Author::Contract
 
     books_prepopulator = ->(options){ books.append(Book.new) while books.size < 3 }
     books_populator = ->(options){ 
-      item = books.find { |book| book.id.to_s == options.dig(:fragment, :id).to_s }
+      item = if options.dig(:fragment, :id).present?
+               books.find { |book| book.id.to_s == options[:fragment][:id].to_s }
+             else
+               nil
+             end
 
-      if options[:fragment].values.all?(&:blank?)
+      if options[:fragment].except(:id).values.all?(&:blank?)
+        if item
+          item.model.mark_for_destruction
+        end
         return skip!
       end
 
