@@ -3,7 +3,7 @@ version: "2.4"
 x-app: &app
   build:
     context: .
-    dockerfile: Dockerfile
+    dockerfile: .dockerdev/Dockerfile
   image: pothos-dev:1.0.0
   tmpfs:
     - /tmp
