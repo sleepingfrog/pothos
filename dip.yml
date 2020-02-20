@@ -1,0 +1,43 @@
+version: "4.2"
+
+environment:
+  RAILS_ENV: development
+
+compose:
+  files:
+    - docker-compose.yml
+
+interaction:
+  bash:
+    service: runner
+    command: /bin/bash
+
+  bundle:
+    service: runner
+    command: bundle
+
+  rails:
+    service: runner
+    command: bundle exec rails
+    subcommands:
+      s:
+        service: rails
+        compose:
+          run_options: [service-ports]
+
+  yarn:
+    service: runner
+    command: yarn
+
+  rspec:
+    service: runner
+    environment:
+      RAILS_ENV: test
+    command: bundle exec rspec
+
+provision:
+  - dip compose down --volumes
+  - dip compose up -d postgres
+  - dip bundle install
+  - dip yarn install
+  - dip rails db:prepare
