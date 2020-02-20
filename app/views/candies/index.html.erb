@@ -1,0 +1,12 @@
+<h1>Candies#index</h1>
+<p>Find me in app/views/candies/index.html.erb</p>
+
+<% @candies.each do |candy| %>
+    <ul>
+        <li>
+            <%= link_to candy.name, candy_path(candy) %>
+        </li>
+    </ul>
+<% end %>
+
+<%= link_to "new", new_candy_path %>

@@ -1,0 +1,15 @@
+<h1>Candies#show</h1>
+<p>Find me in app/views/candies/show.html.erb</p>
+
+
+<ul>
+    <% [:name, :price].each do |attr| %>
+        <li>
+            <%= Candy.human_attribute_name attr %>
+            <%= @candy.public_send attr %>
+        </li>
+    <% end %>
+</ul>
+
+<%= image_tag @candy.wrap_paper(:large).url %>
+<%= image_tag @candy.wrap_paper(:small).url %>
