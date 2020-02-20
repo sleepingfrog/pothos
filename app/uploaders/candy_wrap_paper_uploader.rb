@@ -38,7 +38,8 @@ class CandyWrapPaperUploader < Shrine
   Attacher.derivatives :zip do |original|
     result = nil
     Zip::File.open(original) do |zip|
-      Tempfile.open([File.basename(zip.first.to_s), File.extname(zip.first.to_s)]) do |tmpfile|
+      filename = zip.first.name
+      Tempfile.open([File.basename(filename, ".*"), File.extname(filename)]) do |tmpfile|
         zip.first.extract(tmpfile.path) { true }
 
         magick = ImageProcessing::MiniMagick.source(tmpfile).loader(page: 0).convert("jpg")
