@@ -29,6 +29,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'marginalia'
 gem 'reform-rails'
 gem 'trailblazer'
+gem 'shrine'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
