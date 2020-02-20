@@ -32,6 +32,7 @@ RUN apt-get update -qq \
     postgresql-client-11 \
     nodejs \
     yarn=1.21.1-1 \
+    ghostscript \
     imagemagick \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/* \
