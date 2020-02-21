@@ -3,12 +3,12 @@
 
 
 <ul>
-    <% [:name, :price].each do |attr| %>
-        <li>
-            <%= Candy.human_attribute_name attr %>
-            <%= @candy.public_send attr %>
-        </li>
-    <% end %>
+  <% [:name, :price].each do |attr| %>
+    <li>
+      <%= Candy.human_attribute_name attr %>
+      <%= @candy.public_send attr %>
+    </li>
+  <% end %>
 </ul>
 
 <%= image_tag @candy.wrap_paper(:large).url %>
