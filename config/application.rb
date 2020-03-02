@@ -35,5 +35,3 @@ module Pothos
     config.generators.system_tests = nil
   end
 end
-
-Rails.autoloaders.log!
