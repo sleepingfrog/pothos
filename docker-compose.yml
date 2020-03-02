@@ -23,8 +23,12 @@ x-backend: &backend
     - BOOTSNAP_CACHE_DIR=/usr/local/bundle/_bootsnap
     - HISTFILE=/app/log/.bash_history
     - EDITOR=vi
+    - RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672
+    - WORKERS=ActiveJob::QueueAdapters::SneakersAdapter::JobWrapper
   depends_on:
     postgres:
+      condition: service_healthy
+    rabbitmq:
       condition: service_healthy
 
 services:
@@ -41,6 +45,10 @@ services:
     ports:
       - "3000:3000"
 
+  sneakers:
+    <<: *backend
+    command: bundle exec rake sneakers:run
+
   postgres:
     image: postgres:11
     environment:
@@ -54,10 +62,25 @@ services:
       test: pg_isready -U postgres -h 127.0.0.1
       interval: 5s
 
+  rabbitmq:
+    image: rabbitmq:3.8.2-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - rabbitmq:/var/lib/rabbitmq
+    healthcheck:
+      test: ["CMD", "rabbitmqctl", "status"]
+      interval: 5s
+      
+
+
+
 volumes:
   postgres:
   bundle:
   node_modules:
   rails_cache:
   uploads:
+  rabbitmq:
 
