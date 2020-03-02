@@ -62,4 +62,4 @@ Rails.application.configure do
   BetterErrors::Middleware.allow_ip! "0.0.0.0/0"
 end
 
-Rails.autoloaders.log!
+# Rails.autoloaders.log!
