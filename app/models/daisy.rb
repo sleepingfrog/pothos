@@ -1,0 +1,2 @@
+class Daisy < Flower
+end

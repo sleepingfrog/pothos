@@ -1,0 +1,2 @@
+class Erica < Flower
+end
