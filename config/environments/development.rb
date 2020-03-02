@@ -61,3 +61,5 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
   BetterErrors::Middleware.allow_ip! "0.0.0.0/0"
 end
+
+Rails.autoloaders.log!
