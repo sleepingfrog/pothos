@@ -1,33 +1,32 @@
-version: "2.4"
-
-x-app: &app
-  build:
-    context: .
-    dockerfile: .dockerdev/Dockerfile
-  image: pothos-dev:1.0.0
-  tmpfs:
-    - /tmp
-
-x-backend: &backend
-  <<: *app
-  stdin_open: true
-  tty: true
-  volumes:
-    - .:/app:cached
-    - rails_cache:/app/tmp/cache
-    - bundle:/usr/local/bundle
-    - node_modules:/app/node_modules
-    - uploads:/app/public/uploads
-  environment:
-    - DATABASE_URL=postgres://postgres:postgres@postgres:5432
-    - BOOTSNAP_CACHE_DIR=/usr/local/bundle/_bootsnap
-    - HISTFILE=/app/log/.bash_history
-    - EDITOR=vi
-  depends_on:
-    postgres:
-      condition: service_healthy
+version: "3.3"
 
 services:
+  app: &app
+    build:
+      context: .
+      dockerfile: .dockerdev/Dockerfile
+    image: pothos-dev:1.0.0
+    tmpfs:
+      - /tmp
+
+  backend: &backend
+    <<: *app
+    stdin_open: true
+    tty: true
+    volumes:
+      - .:/app:cached
+      - rails_cache:/app/tmp/cache
+      - bundle:/usr/local/bundle
+      - node_modules:/app/node_modules
+      - uploads:/app/public/uploads
+    environment:
+      - DATABASE_URL=postgres://postgres:postgres@postgres:5432
+      - BOOTSNAP_CACHE_DIR=/usr/local/bundle/_bootsnap
+      - HISTFILE=/app/log/.bash_history
+      - EDITOR=vi
+    depends_on:
+      - postgres
+
   runner:
     <<: *backend
     command: /bin/bash
