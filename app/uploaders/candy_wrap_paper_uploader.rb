@@ -9,7 +9,16 @@ class CandyWrapPaperUploader < Shrine
   plugin :validation_helpers
 
   Attacher.validate do
-    validate_mime_type %w[image/jpeg application/pdf application/zip], message: "file type invalid"
+    mime_type = file.mime_type
+    if mime_type == "application/zip"
+      Zip::File.open(file.download) do |zip|
+        mime_type = Marcel::MimeType.for zip.first.get_input_stream
+      end
+    end
+
+    unless mime_type.in? %w[image/jpeg application/pdf application/zip]
+      errors <<  "file type invalid"
+    end
   end
 
   Attacher.derivatives do |original|
