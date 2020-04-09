@@ -16,7 +16,7 @@ class CandyWrapPaperUploader < Shrine
       end
     end
 
-    unless mime_type.in? %w[image/jpeg application/pdf application/zip]
+    unless mime_type.in? %w[image/jpeg application/pdf]
       errors <<  "file type invalid"
     end
   end
@@ -57,12 +57,14 @@ class CandyWrapPaperUploader < Shrine
       filename = zip.first.name
       Tempfile.open([File.basename(filename, ".*"), File.extname(filename)]) do |tmpfile|
         zip.first.extract(tmpfile.path) { true }
+        mime_type = Marcel::MimeType.for tmpfile
 
-        magick = ImageProcessing::MiniMagick.source(tmpfile).loader(page: 0).convert("png")
-        result = {
-          large: magick.resize_to_limit!(800, 800),
-          small: magick.resize_to_limit!(300, 300),
-        }
+        result = case mime_type
+                 when "image/jpeg"
+                   process_derivatives(:image, tmpfile)
+                 when "application/pdf"
+                   process_derivatives(:pdf, tmpfile)
+                 end
       end
     end
 
