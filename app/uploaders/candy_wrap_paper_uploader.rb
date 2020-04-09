@@ -50,7 +50,6 @@ class CandyWrapPaperUploader < Shrine
     }
   end
 
-  # expecting application/pdf
   Attacher.derivatives :zip do |original|
     result = nil
     Zip::File.open(original) do |zip|
