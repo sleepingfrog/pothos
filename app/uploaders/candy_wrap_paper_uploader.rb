@@ -22,7 +22,7 @@ class CandyWrapPaperUploader < Shrine
   end
 
   Attacher.derivatives do |original|
-    case file.mime_type
+    case Marcel::MimeType.for original
     when "image/jpeg"
       process_derivatives(:image, original)
     when "application/pdf"
@@ -58,11 +58,7 @@ class CandyWrapPaperUploader < Shrine
       Tempfile.open([File.basename(filename, ".*"), File.extname(filename)]) do |tmpfile|
         zip.first.extract(tmpfile.path) { true }
 
-        magick = ImageProcessing::MiniMagick.source(tmpfile).loader(page: 0).convert("png")
-        result = {
-          large: magick.resize_to_limit!(800, 800),
-          small: magick.resize_to_limit!(300, 300),
-        }
+        result = process_derivatives(tmpfile)
       end
     end
 
