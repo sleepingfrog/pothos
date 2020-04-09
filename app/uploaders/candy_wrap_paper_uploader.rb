@@ -4,6 +4,13 @@ class CandyWrapPaperUploader < Shrine
   plugin :default_storage, cache: :candy_wrap_cache, store: :candy_wrap_store
   plugin :activerecord
   plugin :derivatives
+  plugin :determine_mime_type, analyzer: :marcel
+  plugin :validation
+  plugin :validation_helpers
+
+  Attacher.validate do
+    validate_mime_type %w[application/zip], message: "file type invalid"
+  end
 
   Attacher.derivatives do |original|
     case file.mime_type

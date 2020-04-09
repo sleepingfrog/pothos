@@ -1,6 +1,12 @@
 <h1>Candies#new</h1>
 <p>Find me in app/views/candies/new.html.erb</p>
 
+<ul>
+<% @candy.errors.full_messages.each do |message| %>
+  <li><%= message %></li>
+<% end %>
+</ul>
+
 <%= form_with(model: @candy, url: candies_path, method: :post, local: true ) do |form| %>
   <%= form.label :name %>
   <%= form.text_field :name %>

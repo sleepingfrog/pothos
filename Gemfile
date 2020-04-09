@@ -31,6 +31,7 @@ gem 'reform-rails'
 gem 'trailblazer'
 gem 'shrine'
 gem 'rubyzip'
+gem 'marcel'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
