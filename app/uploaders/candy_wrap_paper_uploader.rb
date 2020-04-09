@@ -24,7 +24,7 @@ class CandyWrapPaperUploader < Shrine
   end
 
   Attacher.derivatives :image do |original|
-    magick = ImageProcessing::MiniMagick.source(original)
+    magick = ImageProcessing::MiniMagick.source(original).convert('png')
 
     {
       large: magick.resize_to_limit!(800, 800),
@@ -33,7 +33,7 @@ class CandyWrapPaperUploader < Shrine
   end
 
   Attacher.derivatives :pdf do |original|
-    magick = ImageProcessing::MiniMagick.source(original).loader(page: 0).convert("jpg")
+    magick = ImageProcessing::MiniMagick.source(original).loader(page: 0).convert("png")
 
     {
       large: magick.resize_to_limit!(800, 800),
@@ -49,7 +49,7 @@ class CandyWrapPaperUploader < Shrine
       Tempfile.open([File.basename(filename, ".*"), File.extname(filename)]) do |tmpfile|
         zip.first.extract(tmpfile.path) { true }
 
-        magick = ImageProcessing::MiniMagick.source(tmpfile).loader(page: 0).convert("jpg")
+        magick = ImageProcessing::MiniMagick.source(tmpfile).loader(page: 0).convert("png")
         result = {
           large: magick.resize_to_limit!(800, 800),
           small: magick.resize_to_limit!(300, 300),
