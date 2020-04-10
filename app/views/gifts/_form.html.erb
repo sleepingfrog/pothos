@@ -18,7 +18,9 @@
 
   <div class="field">
     <%= form.label :wrapping %>
-    <%= form.text_field :wrapping %>
+    <%= form.collection_radio_buttons :wrapping, Gift.wrapping.options, :second, :first do |builder| %>
+      <%= builder.label { builder.radio_button + builder.text } %>
+    <% end %>
   </div>
 
   <div class="actions">
