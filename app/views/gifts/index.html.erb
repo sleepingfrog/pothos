@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Gifts</h1>
+
+<%= render "list", gifts: @gifts %>
+
+<br>
+
+<%= link_to 'New Gift', new_gift_path %>
+
+<br>
+
+<%= link_to "Wrapped Gifts", wrapped_gifts_path %>
+<%= link_to "Nowrapped Gifts", nowrapped_gifts_path %>

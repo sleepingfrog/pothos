@@ -1,6 +1,12 @@
 require "sidekiq/web"
 
 Rails.application.routes.draw do
+  resources :gifts do
+    collection do
+      get :wrapped
+      get :nowrapped
+    end
+  end
   resources :candies, only: [:index, :new, :create, :show]
   resources :authors
   resources :posts

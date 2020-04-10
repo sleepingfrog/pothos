@@ -47,6 +47,13 @@ ActiveRecord::Schema.define(version: 2020_03_02_012132) do
     t.index ["type"], name: "index_flowers_on_type"
   end
 
+  create_table "gifts", force: :cascade do |t|
+    t.string "message"
+    t.string "wrapping"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "posts", force: :cascade do |t|
     t.string "title"
     t.text "body"
