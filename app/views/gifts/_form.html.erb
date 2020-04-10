@@ -1,0 +1,27 @@
+<%= form_with(model: gift, local: true) do |form| %>
+  <% if gift.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(gift.errors.count, "error") %> prohibited this gift from being saved:</h2>
+
+      <ul>
+        <% gift.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :message %>
+    <%= form.text_field :message %>
+  </div>
+
+  <div class="field">
+    <%= form.label :wrapping %>
+    <%= form.text_field :wrapping %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
