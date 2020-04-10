@@ -1,5 +1,5 @@
 class Gift < ApplicationRecord
   extend Enumerize
 
-  enumerize :wrapping, in: %w[no_wrap ribbon paper bag non_woven_fabric]
+  enumerize :wrapping, in: %w[no_wrap ribbon paper bag non_woven_fabric], scope: true
 end

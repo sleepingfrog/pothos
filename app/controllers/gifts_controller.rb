@@ -7,6 +7,14 @@ class GiftsController < ApplicationController
     @gifts = Gift.all
   end
 
+  def wrapped
+    @gifts = Gift.without_wrapping(:no_wrap).all
+  end
+
+  def nowrapped
+    @gifts = Gift.with_wrapping(:no_wrap).all
+  end
+
   # GET /gifts/1
   # GET /gifts/1.json
   def show

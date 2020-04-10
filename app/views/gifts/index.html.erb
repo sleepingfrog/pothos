@@ -2,28 +2,13 @@
 
 <h1>Gifts</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Message</th>
-      <th>Wrapping</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @gifts.each do |gift| %>
-      <tr>
-        <td><%= gift.message %></td>
-        <td><%= gift.wrapping_text %></td>
-        <td><%= link_to 'Show', gift %></td>
-        <td><%= link_to 'Edit', edit_gift_path(gift) %></td>
-        <td><%= link_to 'Destroy', gift, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<%= render "list", gifts: @gifts %>
 
 <br>
 
 <%= link_to 'New Gift', new_gift_path %>
+
+<br>
+
+<%= link_to "Wrapped Gifts", wrapped_gifts_path %>
+<%= link_to "Nowrapped Gifts", nowrapped_gifts_path %>
