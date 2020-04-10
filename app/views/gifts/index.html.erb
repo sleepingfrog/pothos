@@ -15,7 +15,7 @@
     <% @gifts.each do |gift| %>
       <tr>
         <td><%= gift.message %></td>
-        <td><%= gift.wrapping %></td>
+        <td><%= gift.wrapping_text %></td>
         <td><%= link_to 'Show', gift %></td>
         <td><%= link_to 'Edit', edit_gift_path(gift) %></td>
         <td><%= link_to 'Destroy', gift, method: :delete, data: { confirm: 'Are you sure?' } %></td>

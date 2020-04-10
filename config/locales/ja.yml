@@ -8,3 +8,16 @@ ja:
       book:
         name: 書籍名
         _delete: 削除
+  activerecord:
+    attributes:
+      gift:
+        message: メッセージ
+        wrapping: 包装
+  enumerize:
+    gift:
+      wrapping:
+        bag: バッグ
+        no_wrap: 包装なし
+        non_woven_fabric: 不織布
+        paper: 包装紙
+        ribbon: リボン
