@@ -1,2 +1,31 @@
 <h1>Hotels#index</h1>
 <p>Find me in app/views/hotels/index.html.erb</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>name</th>
+      <th>food</th>
+      <th>guest</th>
+      <th>staff</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @hotels.each do |hotel| %>
+      <tr>
+        <td>
+          <%= hotel.name %>
+        </td>
+        <td>
+          <%= hotel.food.name %>
+        </td>
+        <td>
+          <%= hotel.guest.name %>
+        </td>
+        <td>
+          <%= hotel.staff.name %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
