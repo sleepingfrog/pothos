@@ -1,0 +1,39 @@
+<h1>Hotels#index</h1>
+<p>Find me in app/views/hotels/index.html.erb</p>
+
+<%= form_with model: @search, method: :get, url: '', local: true do |form| %>
+  <% %i[food guest staff].each do |key| %>
+    <%= form.label key %>
+    <%= form.text_field key %>
+  <% end %>
+
+  <%= form.submit 'submit' %>
+<% end %>
+<table>
+  <thead>
+    <tr>
+      <th>name</th>
+      <th>food</th>
+      <th>guest</th>
+      <th>staff</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @hotels.each do |hotel| %>
+      <tr>
+        <td>
+          <%= hotel.name %>
+        </td>
+        <td>
+          <%= hotel.food.name %>
+        </td>
+        <td>
+          <%= hotel.guest.name %>
+        </td>
+        <td>
+          <%= hotel.staff.name %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

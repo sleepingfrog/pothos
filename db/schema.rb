@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_10_042737) do
+ActiveRecord::Schema.define(version: 2020_05_15_092313) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,24 @@ ActiveRecord::Schema.define(version: 2020_04_10_042737) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "hotels", force: :cascade do |t|
+    t.string "name"
+    t.bigint "staff_id", null: false
+    t.bigint "guest_id", null: false
+    t.bigint "food_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["food_id"], name: "index_hotels_on_food_id"
+    t.index ["guest_id"], name: "index_hotels_on_guest_id"
+    t.index ["staff_id"], name: "index_hotels_on_staff_id"
+  end
+
+  create_table "insects", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "posts", force: :cascade do |t|
     t.string "title"
     t.text "body"
@@ -62,4 +80,7 @@ ActiveRecord::Schema.define(version: 2020_04_10_042737) do
   end
 
   add_foreign_key "books", "authors"
+  add_foreign_key "hotels", "insects", column: "food_id"
+  add_foreign_key "hotels", "insects", column: "guest_id"
+  add_foreign_key "hotels", "insects", column: "staff_id"
 end
