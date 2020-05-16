@@ -43,7 +43,7 @@ module Form
       foreign_key = association.foreign_key
       select_arel = scope.arel_table
 
-      value_string = "%#{value}%"
+      value_string = "%#{escape_like(value)}%"
       join_source = scope
         .arel
         .join(table, Arel::Nodes::InnerJoin).on(
@@ -54,6 +54,10 @@ module Form
       scope
         .joins(join_source)
         .where(table[:name].matches(value_string, nil, true))
+    end
+
+    def escape_like(string)
+      string.gsub(/[\\%_]/) { |m| "\\#{m}" }
     end
   end
 end
