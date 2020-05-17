@@ -1,7 +1,7 @@
 class HotelsController < ApplicationController
   def index
     @search = Form::SearchHotel.new search_hotel_params
-    @hotels = @search.search
+    @hotels = @search.search.preload(:food, :guest, :staff)
     puts @hotels.explain
   end
 
